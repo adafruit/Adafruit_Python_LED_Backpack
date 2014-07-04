@@ -22,7 +22,6 @@ import time
 
 import Image
 import ImageDraw
-import ImageFont
 
 from Adafruit_LED_Backpack import BicolorMatrix8x8
 
@@ -75,3 +74,6 @@ display.set_image(image)
 
 # Draw the buffer to the display hardware.
 display.write_display()
+
+# See the SSD1306 library for more examples of using the Python Imaging Library
+# such as drawing text: https://github.com/adafruit/Adafruit_Python_SSD1306
