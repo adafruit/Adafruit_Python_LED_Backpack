@@ -27,7 +27,7 @@ from Adafruit_LED_Backpack import SevenSegment
 display = SevenSegment.SevenSegment()
 
 # Alternatively, create a display with a specific I2C address and/or bus.
-# display = SevenSegment.SevenSegment(address=0x74, bus=1)
+# display = SevenSegment.SevenSegment(address=0x74, busnum=1)
 
 # Initialize the display. Must be called once before using the display.
 display.begin()
