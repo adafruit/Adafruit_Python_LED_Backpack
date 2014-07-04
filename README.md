@@ -8,11 +8,17 @@ Designed specifically to work with the Adafruit LED backpack displays ----> http
 For all platforms (Raspberry Pi and Beaglebone Black) make sure your system is able to compile Python extensions.  On Raspbian or Beaglebone Black's Debian/Ubuntu image you can ensure your system is ready by executing:
 
 ````
-apt-get update
+sudo apt-get update
 sudo apt-get install build-essential python-dev
 ````
 
-Install the library by downloading with the download link on the right, unzipping the archive, and executing:
+You will also need to make sure the python-smbus library is installed by executing:
+
+````
+sudo apt-get install python-smbus
+````
+
+Install the library by downloading with the download link on the right, unzipping the archive, navigating inside the library's directory and executing:
 
 ````
 sudo python setup.py install
