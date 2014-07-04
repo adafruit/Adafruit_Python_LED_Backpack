@@ -22,7 +22,6 @@ import time
 
 import Image
 import ImageDraw
-import ImageFont
 
 from Adafruit_LED_Backpack import Matrix8x8
 
