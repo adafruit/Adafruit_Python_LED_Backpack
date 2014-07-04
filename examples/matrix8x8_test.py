@@ -24,7 +24,7 @@ from Adafruit_LED_Backpack import Matrix8x8
 
 
 # Create display instance on default I2C address (0x70) and bus number.
-display = Matrix8x8.Matrix8x8(address=0x71)
+display = Matrix8x8.Matrix8x8()
 
 # Alternatively, create a display with a specific I2C address and/or bus.
 # display = Matrix8x8.Matrix8x8(address=0x74, bus=1)
