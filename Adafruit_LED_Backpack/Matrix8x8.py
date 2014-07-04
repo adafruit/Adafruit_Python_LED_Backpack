@@ -38,3 +38,22 @@ class Matrix8x8(HT16K33.HT16K33):
 			# Ignore out of bounds pixels.
 			return
 		self.set_led(y*16+((x+7)%8), value)
+
+	def set_image(self, image):
+		"""Set display buffer to Python Image Library image.  Image will be converted
+		to 1 bit color and non-zero color values will light the LEDs.
+		"""
+		imwidth, imheight = image.size
+		if imwidth != 8 or imheight != 8:
+			raise ValueError('Image must be an 8x8 pixels in size.')
+		# Convert image to 1 bit color and grab all the pixels.
+		pix = image.convert('1').load()
+		# Loop through each pixel and write the display buffer pixel.
+		for x in [0, 1, 2, 3, 4, 5, 6, 7]:
+			for y in [0, 1, 2, 3, 4, 5, 6, 7]:
+				color = pix[(x, y)]
+				# Handle the color of the pixel, off or on.
+				if color == 0:
+					self.set_pixel(x, y, 0)
+				else:
+					self.set_pixel(x, y, 1)

@@ -50,3 +50,29 @@ class BicolorMatrix8x8(HT16K33.HT16K33):
 		self.set_led(y*16+x, 1 if value & GREEN > 0 else 0)
 		# Set red LED based on 2nd bit in value.
 		self.set_led(y*16+x+8, 1 if value & RED > 0 else 0)
+
+	def set_image(self, image):
+		"""Set display buffer to Python Image Library image.  Red pixels (r=255,
+		g=0, b=0) will map to red LEDs, green pixels (r=0, g=255, b=0) will map to 
+		green LEDs, and yellow pixels (r=255, g=255, b=0) will map to yellow LEDs.
+		All other pixel values will map to an unlit LED value.
+		"""
+		imwidth, imheight = image.size
+		if imwidth != 8 or imheight != 8:
+			raise ValueError('Image must be an 8x8 pixels in size.')
+		# Convert image to RGB and grab all the pixels.
+		pix = image.convert('RGB').load()
+		# Loop through each pixel and write the display buffer pixel.
+		for x in [0, 1, 2, 3, 4, 5, 6, 7]:
+			for y in [0, 1, 2, 3, 4, 5, 6, 7]:
+				color = pix[(x, y)]
+				# Handle the color of the pixel.
+				if color == (255, 0, 0):
+					self.set_pixel(x, y, RED)
+				elif color == (0, 255, 0):
+					self.set_pixel(x, y, GREEN)
+				elif color == (255, 255, 0):
+					self.set_pixel(x, y, YELLOW)
+				else:
+					# Unknown color, default to LED off.
+					self.set_pixel(x, y, OFF)

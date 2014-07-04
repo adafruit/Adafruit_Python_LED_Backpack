@@ -20,6 +20,10 @@
 # THE SOFTWARE.
 import time
 
+import Image
+import ImageDraw
+import ImageFont
+
 from Adafruit_LED_Backpack import BicolorMatrix8x8
 
 
@@ -33,19 +37,41 @@ display = BicolorMatrix8x8.BicolorMatrix8x8()
 display.begin()
 
 # Run through each color and pixel.
-print 'Press Ctrl-C to quit.'
-while True:
-	# Iterate through all colors.
-	for c in [BicolorMatrix8x8.RED, BicolorMatrix8x8.GREEN, BicolorMatrix8x8.YELLOW]:
-		# Iterate through all positions x and y.
-		for x in range(8):
-			for y in range(8):
-				# Clear the display buffer.
-				display.clear()
-				# Set pixel at position i, j to appropriate color.
-				display.set_pixel(x, y, c)
-				# Write the display buffer to the hardware.  This must be called to
-				# update the actual display LEDs.
-				display.write_display()
-				# Delay for a quarter second.
-				time.sleep(0.25)
+# Iterate through all colors.
+for c in [BicolorMatrix8x8.RED, BicolorMatrix8x8.GREEN, BicolorMatrix8x8.YELLOW]:
+	# Iterate through all positions x and y.
+	for x in range(8):
+		for y in range(8):
+			# Clear the display buffer.
+			display.clear()
+			# Set pixel at position i, j to appropriate color.
+			display.set_pixel(x, y, c)
+			# Write the display buffer to the hardware.  This must be called to
+			# update the actual display LEDs.
+			display.write_display()
+			# Delay for a quarter second.
+			time.sleep(0.25)
+
+# Draw some colored shapes using the Python Imaging Library.
+
+# Clear the display buffer.
+display.clear()
+
+# First create an 8x8 RGB image.
+image = Image.new('RGB', (8, 8))
+
+# Then create a draw instance.
+draw = ImageDraw.Draw(image)
+
+# Draw a filled yellow rectangle with red outline.
+draw.rectangle((0,0,7,7), outline=(255,0,0), fill=(255,255,0))
+
+# Draw an X with two green lines.
+draw.line((1,1,6,6), fill=(0,255,0))
+draw.line((1,6,6,1), fill=(0,255,0))
+
+# Draw the image on the display buffer.
+display.set_image(image)
+
+# Draw the buffer to the display hardware.
+display.write_display()
