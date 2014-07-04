@@ -12,10 +12,10 @@ sudo apt-get update
 sudo apt-get install build-essential python-dev
 ````
 
-You will also need to make sure the python-smbus library is installed by executing:
+You will also need to make sure the python-smbus and python-imaging library is installed by executing:
 
 ````
-sudo apt-get install python-smbus
+sudo apt-get install python-smbus python-imaging
 ````
 
 Install the library by downloading with the download link on the right, unzipping the archive, navigating inside the library's directory and executing:
