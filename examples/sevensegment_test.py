@@ -73,3 +73,6 @@ while True:
 		display.set_colon(colon)
 		display.write_display()
 		time.sleep(0.5)
+	# Flip colon on or off.
+	colon = not colon
+
