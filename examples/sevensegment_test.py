@@ -32,6 +32,9 @@ display = SevenSegment.SevenSegment()
 # Initialize the display. Must be called once before using the display.
 display.begin()
 
+# Keep track of the colon being turned on or off.
+colon = False
+
 # Run through different number printing examples.
 print 'Press Ctrl-C to quit.'
 numbers = [0.0, 1.0, -1.0, 0.55, -0.55, 10.23, -10.2, 100.5, -100.5]
@@ -42,6 +45,8 @@ while True:
 		display.clear()
 		# Print a floating point number to the display.
 		display.print_float(i)
+		# Set the colon on or off (True/False).
+		display.set_colon(colon)
 		# Write the display buffer to the hardware.  This must be called to
 		# update the actual display LEDs.
 		display.write_display()
@@ -51,17 +56,20 @@ while True:
 	for i in numbers:
 		display.clear()
 		display.print_float(i, decimal_digits=1)
+		display.set_colon(colon)
 		display.write_display()
 		time.sleep(1.0)
 	# Print the same numbers with no decimal digits and left justified.
 	for i in numbers:
 		display.clear()
 		display.print_float(i, decimal_digits=0, justify_right=False)
+		display.set_colon(colon)
 		display.write_display()
 		time.sleep(1.0)
 	# Run through some hex digits.
 	for i in range(0xFF):
 		display.clear()
 		display.print_hex(i)
+		display.set_colon(colon)
 		display.write_display()
 		time.sleep(0.5)

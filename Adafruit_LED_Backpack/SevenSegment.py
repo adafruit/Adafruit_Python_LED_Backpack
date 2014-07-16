@@ -92,9 +92,9 @@ class SevenSegment(HT16K33.HT16K33):
 	def set_colon(self, show_colon):
 		"""Turn the colon on with show colon True, or off with show colon False."""
 		if show_colon:
-			self.buffer[2] = 0x02
+			self.buffer[4] = 0x02
 		else:
-			self.buffer[2] = 0x00
+			self.buffer[4] = 0x00
 
 	def print_number_str(self, value, justify_right=True):
 		"""Print a 4 character long string of numeric values to the display.
