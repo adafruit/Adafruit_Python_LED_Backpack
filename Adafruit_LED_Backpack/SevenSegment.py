@@ -43,15 +43,43 @@ DIGIT_VALUES = {
 	'F': 0x71
 }
 
+IDIGIT_VALUES = {
+	' ': 0x00,
+	'-': 0x40,
+	'0': 0x3F,
+	'1': 0x30,
+	'2': 0x5B,
+	'3': 0x79,
+	'4': 0x74,
+	'5': 0x6D,
+	'6': 0x6F,
+	'7': 0x38,
+	'8': 0x7F,
+	'9': 0x7D,
+	'A': 0x7E,
+	'B': 0x67,
+	'C': 0x0F,
+	'D': 0x73,
+	'E': 0x4F,
+	'F': 0x4E
+}
+
+
 
 class SevenSegment(HT16K33.HT16K33):
 	"""Seven segment LED backpack display."""
 
-	def __init__(self, **kwargs):
+	def __init__(self, invert=False, **kwargs):
 		"""Initialize display.  All arguments will be passed to the HT16K33 class
 		initializer, including optional I2C address and bus number parameters.
 		"""
 		super(SevenSegment, self).__init__(**kwargs)
+		self.invert = invert
+
+	def set_invert(self, _invert):
+		"""Set whether the display is upside-down or not.
+		"""
+		self.invert = _invert
 
 	def set_digit_raw(self, pos, bitmask):
 		"""Set digit at position to raw bitmask value.  Position should be a value
@@ -61,8 +89,15 @@ class SevenSegment(HT16K33.HT16K33):
 			return
 		# Jump past the colon at position 2 by adding a conditional offset.
 		offset = 0 if pos < 2 else 1
+
+		# Calculate the correct position depending on orientation
+		if self.invert:
+			pos = 4-(pos+offset)
+		else:
+			pos = pos+offset
+
 		# Set the digit bitmask value at the appropriate position.
-		self.buffer[(pos+offset)*2] = bitmask & 0xFF
+		self.buffer[pos*2] = bitmask & 0xFF
 
 	def set_decimal(self, pos, decimal):
 		"""Turn decimal point on or off at provided position.  Position should be
@@ -74,18 +109,29 @@ class SevenSegment(HT16K33.HT16K33):
 			return
 		# Jump past the colon at position 2 by adding a conditional offset.
 		offset = 0 if pos < 2 else 1
+
+		# Calculate the correct position depending on orientation
+		if self.invert:
+			pos = 4-(pos+offset)
+		else:
+			pos = pos+offset
+
 		# Set bit 7 (decimal point) based on provided value.
 		if decimal:
-			self.buffer[(pos+offset)*2] |= (1 << 7)
+			self.buffer[pos*2] |= (1 << 7)
 		else:
-			self.buffer[(pos+offset)*2] &= ~(1 << 7)
+			self.buffer[pos*2] &= ~(1 << 7)
 
 	def set_digit(self, pos, digit, decimal=False):
 		"""Set digit at position to provided value.  Position should be a value
 		of 0 to 3 with 0 being the left most digit on the display.  Digit should
 		be a number 0-9, character A-F, space (all LEDs off), or dash (-).
 		"""
-		self.set_digit_raw(pos, DIGIT_VALUES.get(str(digit).upper(), 0x00))
+		if self.invert:
+			self.set_digit_raw(pos, IDIGIT_VALUES.get(str(digit).upper(), 0x00))
+		else:
+			self.set_digit_raw(pos, DIGIT_VALUES.get(str(digit).upper(), 0x00))
+
 		if decimal:
 			self.set_decimal(pos, True)
 
