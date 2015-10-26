@@ -69,12 +69,12 @@ IDIGIT_VALUES = {
 class SevenSegment(HT16K33.HT16K33):
 	"""Seven segment LED backpack display."""
 
-	def __init__(self, **kwargs):
+	def __init__(self, invert=False, **kwargs):
 		"""Initialize display.  All arguments will be passed to the HT16K33 class
 		initializer, including optional I2C address and bus number parameters.
 		"""
 		super(SevenSegment, self).__init__(**kwargs)
-		self.invert = True
+		self.invert = invert
 
 	def set_invert(self, _invert):
 		"""Set whether the display is upside-down or not.

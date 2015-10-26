@@ -72,7 +72,17 @@ while True:
 		display.print_hex(i)
 		display.set_colon(colon)
 		display.write_display()
-		time.sleep(0.5)
+		time.sleep(0.25)
+	# Run through hex digits with an inverted (flipped upside down)
+	# display.
+	display.set_invert(True)
+	for i in range(0xFF):
+		display.clear()
+		display.print_hex(i)
+		display.set_colon(colon)
+		display.write_display()
+		time.sleep(0.25)
+	display.set_invert(False)
 	# Flip colon on or off.
 	colon = not colon
 
