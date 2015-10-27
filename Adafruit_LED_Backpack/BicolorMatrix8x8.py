@@ -18,13 +18,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-
+from Matrix8x8 import Matrix8x8
 
 # Color values as convenient globals.
 # This is a bitmask value where the first bit is green, and the second bit is
 # red.  If both bits are set the color is yellow (red + green light).
-from Matrix8x8 import Matrix8x8
-
 OFF = 0
 GREEN = 1
 RED = 2
