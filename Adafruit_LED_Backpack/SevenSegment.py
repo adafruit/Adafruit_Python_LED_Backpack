@@ -138,14 +138,36 @@ class SevenSegment(HT16K33.HT16K33):
 	def set_colon(self, show_colon):
 		"""Turn the colon on with show colon True, or off with show colon False."""
 		if show_colon:
-			self.buffer[4] = 0x02
+			self.buffer[4] |= 0x02
 		else:
-			self.buffer[4] = 0x00
+			self.buffer[4] &= (~0x02) & 0xFF
+
+	def set_left_colon(self, show_colon):
+		"""Turn the left colon on with show color True, or off with show colon
+		False.  Only the large 1.2" 7-segment display has a left colon.
+		"""
+		if show_colon:
+			self.buffer[4] |= 0x04
+			self.buffer[4] |= 0x08
+		else:
+			self.buffer[4] &= (~0x04) & 0xFF
+			self.buffer[4] &= (~0x08) & 0xFF
+	
+	def set_fixed_decimal(self, show_decimal):
+		"""Turn on/off the single fixed decimal point on the large 1.2" 7-segment
+		display.  Set show_decimal to True to turn on and False to turn off.
+		Only the large 1.2" 7-segment display has this decimal point (in the
+		upper right in the normal orientation of the display).
+		"""
+		if show_decimal:
+			self.buffer[4] |= 0x10
+		else:
+			self.buffer[4] &= (~0x10) & 0xFF
 
 	def print_number_str(self, value, justify_right=True):
 		"""Print a 4 character long string of numeric values to the display.
 		Characters in the string should be any supported character by set_digit,
-		or a decimal point.  Decimal point characters will be associated with 
+		or a decimal point.  Decimal point characters will be associated with
 		the previous character.
 		"""
 		# Calculate length of value without decimals.
@@ -167,7 +189,7 @@ class SevenSegment(HT16K33.HT16K33):
 
 	def print_float(self, value, decimal_digits=2, justify_right=True):
 		"""Print a numeric value to the display.  If value is negative
-		it will be printed with a leading minus sign.  Decimal digits is the 
+		it will be printed with a leading minus sign.  Decimal digits is the
 		desired number of digits after the decimal point.
 		"""
 		format_string = '{{0:0.{0}F}}'.format(decimal_digits)

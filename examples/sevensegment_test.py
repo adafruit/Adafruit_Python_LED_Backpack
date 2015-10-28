@@ -83,6 +83,17 @@ while True:
 		display.write_display()
 		time.sleep(0.25)
 	display.set_invert(False)
+	# For the large 1.2" 7-segment display only there are extra functions to
+	# turn on/off the left side colon and the fixed decimal point.  Uncomment
+	# to try them out:
+	# To turn on the left side colon:
+	#display.set_left_colon(True)
+	# To turn off the left side colon:
+	#display.set_left_colon(False)
+	# To turn on the fixed decimal point (in upper right in normal orientation):
+	#display.set_fixed_decimal(True)
+	# To turn off the fixed decimal point:
+	#display.set_fixed_decimal(False)
+	# Make sure to call write_display() to make the above visible!
 	# Flip colon on or off.
 	colon = not colon
-

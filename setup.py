@@ -3,7 +3,7 @@ use_setuptools()
 from setuptools import setup, find_packages
 
 setup(name 				= 'Adafruit_LED_Backpack',
-	  version 			= '1.6.0',
+	  version 			= '1.7.0',
 	  author			= 'Tony DiCola',
 	  author_email		= 'tdicola@adafruit.com',
 	  description		= 'Library to control LED backpack displays such as 8x8 single and bi-color matrices, bargraphs, 7 segment, and 14 segment displays.',
