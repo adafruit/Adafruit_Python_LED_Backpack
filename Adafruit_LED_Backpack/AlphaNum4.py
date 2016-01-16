@@ -165,14 +165,14 @@ class AlphaNum4(HT16K33.HT16K33):
 			self.set_decimal(pos, True)
 
 	def print_str(self, value, justify_right=True):
-		"""Print a 4 character long string of values to the display. Characters 
+		"""Print a 4 character long string of values to the display. Characters
 		in the string should be any ASCII value 32 to 127 (printable ASCII).
 		"""
 		# Calculcate starting position of digits based on justification.
 		pos = (4-len(value)) if justify_right else 0
 		# Go through each character and print it on the display.
 		for i, ch in enumerate(value):
-			self.set_digit(i, ch)
+			self.set_digit(i+pos, ch)
 
 	def print_number_str(self, value, justify_right=True):
 		"""Print a 4 character long string of numeric values to the display. This
@@ -198,7 +198,7 @@ class AlphaNum4(HT16K33.HT16K33):
 
 	def print_float(self, value, decimal_digits=2, justify_right=True):
 		"""Print a numeric value to the display.  If value is negative
-		it will be printed with a leading minus sign.  Decimal digits is the 
+		it will be printed with a leading minus sign.  Decimal digits is the
 		desired number of digits after the decimal point.
 		"""
 		format_string = '{{0:0.{0}F}}'.format(decimal_digits)
