@@ -33,24 +33,24 @@ display = BicolorBargraph24.BicolorBargraph24()
 display.begin()
 
 # Run through all bars and colors at different brightness levels.
-print 'Press Ctrl-C to quit.'
+print('Press Ctrl-C to quit.')
 brightness = 15
 while True:
-	# Set display brightness (15 is max, 0 is min).
-	display.set_brightness(brightness)
-	for i in range(24):
-		# Clear the display buffer.
-		display.clear()
-		# Light up 3 bars, each a different color and position.
-		display.set_bar(i,   BicolorBargraph24.RED)
-		display.set_bar(i+1, BicolorBargraph24.GREEN)
-		display.set_bar(i+2, BicolorBargraph24.YELLOW)
-		# Write the display buffer to the hardware.  This must be called to
-		# update the actual display LEDs.
-		display.write_display()
-		# Delay for half a second.
-		time.sleep(0.5)
-	# Decrease brightness, wrapping back to 15 if necessary.
-	brightness -= 1
-	if brightness == 0:
-		brightness = 15
+    # Set display brightness (15 is max, 0 is min).
+    display.set_brightness(brightness)
+    for i in range(24):
+        # Clear the display buffer.
+        display.clear()
+        # Light up 3 bars, each a different color and position.
+        display.set_bar(i,   BicolorBargraph24.RED)
+        display.set_bar(i+1, BicolorBargraph24.GREEN)
+        display.set_bar(i+2, BicolorBargraph24.YELLOW)
+        # Write the display buffer to the hardware.  This must be called to
+        # update the actual display LEDs.
+        display.write_display()
+        # Delay for half a second.
+        time.sleep(0.5)
+    # Decrease brightness, wrapping back to 15 if necessary.
+    brightness -= 1
+    if brightness == 0:
+        brightness = 15

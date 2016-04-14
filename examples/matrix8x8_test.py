@@ -20,8 +20,8 @@
 # THE SOFTWARE.
 import time
 
-import Image
-import ImageDraw
+from PIL import Image
+from PIL import ImageDraw
 
 from Adafruit_LED_Backpack import Matrix8x8
 

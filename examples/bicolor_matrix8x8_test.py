@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 import time
-import Image
-import ImageDraw
+from PIL import Image
+from PIL import ImageDraw
 
 from Adafruit_LED_Backpack import BicolorMatrix8x8
 
