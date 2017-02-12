@@ -34,7 +34,7 @@ class Matrix8x16(HT16K33.HT16K33):
 
     def set_pixel(self, x, y, value):
         """Set pixel at position x, y to the given value.  X and Y should be values
-        of 0 to 7.  Value should be 0 for off and non-zero for on.
+        of 0 to 7 and 0 to 15, resp.  Value should be 0 for off and non-zero for on.
         """
         if x < 0 or x > 7 or y < 0 or y > 15:
             # Ignore out of bounds pixels.
