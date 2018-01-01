@@ -38,7 +38,7 @@ class HT16K33(object):
     """Driver for interfacing with a Holtek HT16K33 16x8 LED driver."""
 
     def __init__(self, address=DEFAULT_ADDRESS, i2c=None, **kwargs):
-        """Create an HT16K33 driver for devie on the specified I2C address
+        """Create an HT16K33 driver for device on the specified I2C address
         (defaults to 0x70) and I2C bus (defaults to platform specific bus).
         """
         if i2c is None:
