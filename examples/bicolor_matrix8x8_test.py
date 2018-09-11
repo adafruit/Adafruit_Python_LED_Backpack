@@ -31,6 +31,9 @@ display = BicolorMatrix8x8.BicolorMatrix8x8()
 # Alternatively, create a display with a specific I2C address and/or bus.
 # display = BicolorMatrix8x8.BicolorMatrix8x8(address=0x74, busnum=1)
 
+# On BeagleBone, try busnum=2 if IOError occurs with busnum=1
+# display = BicolorMatrix8x8.BicolorMatrix8x8(address=0x74, busnum=2)
+
 # Initialize the display. Must be called once before using the display.
 display.begin()
 
